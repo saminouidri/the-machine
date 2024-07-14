@@ -1,0 +1,21 @@
+@startuml
+actor User
+participant "MainApp GUI" as GUI
+participant "File Chooser" as FileChooser
+participant "Image Loading" as Loader
+participant "Face Detection" as Detector
+participant "ROI extraction" as Extractor
+participant "DeepFace Analyzer" as Analyzer
+participant "Results Display" as Display
+
+User -> GUI: Select image/video feed
+User -> GUI: Choose detection type (gender/race)
+GUI -> FileChooser: Open file dialog
+FileChooser -> Loader: Load image & convert to RGB
+Loader -> Detector: Detect faces with haar cascade classifier
+Detector -> Extractor: Extract face regions
+Extractor -> Analyzer: DeepFace analysis of features
+Analyzer -> Display: Show results (real time or static image)
+Display -> User:  Extract (from array) and display results on GUI
+
+@enduml

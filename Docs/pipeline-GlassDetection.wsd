@@ -1,0 +1,20 @@
+@startuml
+actor User
+participant "MainApp GUI" as GUI
+participant "Image Loader/Camera Capture" as ImgLoader
+participant "Face Detector" as FaceDet
+participant "Landmark Detector" as LandmarkDet
+participant "Nose Bridge Extractor" as NoseBridge
+participant "Edge Detection" as EdgeDet
+participant "Results Display" as Display
+
+User -> GUI: Initiate detection
+GUI -> ImgLoader: Capture or load image
+ImgLoader -> FaceDet: Detect faces with haar cascade classifier
+FaceDet -> LandmarkDet: Get facial landmarks
+LandmarkDet -> NoseBridge: Isolate nose bridge area
+NoseBridge -> EdgeDet: Perform edge detection
+EdgeDet -> Display: Determine presence of glasses (presence of middle white line)
+Display -> User: Show detection results
+
+@enduml
